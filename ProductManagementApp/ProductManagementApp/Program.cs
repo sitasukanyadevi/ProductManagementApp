@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 namespace ProductManagementApp
-{ 
+{
     class ProductManagement
     {
         public void AddNewProduct(SqlConnection con)
@@ -80,11 +80,11 @@ namespace ProductManagementApp
         }
     }
 
-  internal class Program
-  {
-      public static DataSet ds = new DataSet();   // single copy of varaible
-       static void Main(string[] args)
-       {
+    internal class Program
+    {
+      public static DataSet ds = new DataSet();   // single copy of varaible that will be shared for all the instances
+        static void Main(string[] args)
+        {
             SqlConnection con = new SqlConnection("Server=US-8ZBJZH3; database=ProductApp; Integrated Security=true");
 
             ProductManagement ob = new ProductManagement();
@@ -151,5 +151,5 @@ namespace ProductManagementApp
                 s = Console.ReadLine();
             } while (s.ToLower() == "y");
         }       
-  }  
+    }  
 }
