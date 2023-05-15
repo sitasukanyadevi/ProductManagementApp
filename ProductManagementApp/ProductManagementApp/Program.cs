@@ -76,7 +76,7 @@ namespace ProductManagementApp
             Console.Write("Enter Index of Id: ");
             int i = Convert.ToInt16(Console.ReadLine());
             Program.ds.Tables[0].Rows[i].Delete();
-            Console.WriteLine("Record deleted successfully.");
+            Console.WriteLine("Product deleted successfully.");
         }
     }
 
