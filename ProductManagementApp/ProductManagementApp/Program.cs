@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 namespace ProductManagementApp
-{
+{ 
     class ProductManagement
     {
         public void AddNewProduct(SqlConnection con)
@@ -25,10 +25,10 @@ namespace ProductManagementApp
         {
             Console.Write("Enter id that you want view : ");
             int id = Convert.ToInt16(Console.ReadLine());
-            DataRow[] rows = Program.ds.Tables[0].Select($"Product_Id={id}");
-            if (rows.Length > 0)
+            DataRow[] r = Program.ds.Tables[0].Select($"Product_Id={id}");
+            if (r.Length > 0)
             {
-                DataRow row = rows[0];
+                DataRow row = r[0];
                 Console.WriteLine($"{row["Product_Id"]} | {row["Product_Name"]} | {row["Product_Description"]} | {row["Product_Quantity"]} | {row["Product_Price"]}");
             }
             else
@@ -51,16 +51,25 @@ namespace ProductManagementApp
         }
         public void UpdateProduct(SqlConnection con)
         {
-            Console.WriteLine("Enter the index row:");
-            int i = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter column name: ");
-            string Cname = Console.ReadLine();
-            Console.Write("Enter new value that you want to update : ");
-            string V = Console.ReadLine();
+            Console.Write("Enter id that you want to update: ");
+            int id = Convert.ToInt16(Console.ReadLine());
+            DataRow[] row = Program.ds.Tables[0].Select($"Product_Id={id}");
+            if (row.Length > 0)
+            {
+                Console.WriteLine("Enter the index row:");
+                int i = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter column name: ");
+                string Cname = Console.ReadLine();
+                Console.Write("Enter new value that you want to update : ");
+                string V = Console.ReadLine();
 
-            Program.ds.Tables[0].Rows[i][Cname] = V;
-            Console.WriteLine("Product updated successfully.");
-
+                Program.ds.Tables[0].Rows[i][Cname] = V;
+                Console.WriteLine("Product updated successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"No Product found with Id");
+            }
         }
         public void DeleteProduct(SqlConnection con)
         {
@@ -72,8 +81,8 @@ namespace ProductManagementApp
     }
 
   internal class Program
-     {
-      public static DataSet ds = new DataSet();
+  {
+      public static DataSet ds = new DataSet();   // single copy of varaible
        static void Main(string[] args)
        {
             SqlConnection con = new SqlConnection("Server=US-8ZBJZH3; database=ProductApp; Integrated Security=true");
@@ -142,5 +151,5 @@ namespace ProductManagementApp
                 s = Console.ReadLine();
             } while (s.ToLower() == "y");
         }       
-    }  
+  }  
 }
