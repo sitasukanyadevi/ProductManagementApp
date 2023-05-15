@@ -101,10 +101,16 @@ namespace ProductManagementApp
                 Console.WriteLine("3. Get All Products ");
                 Console.WriteLine("4. Update Product");
                 Console.WriteLine("5. Delete Product ");
-                Console.WriteLine("Enter ur choice");
-
-                int choice = Convert.ToInt32(Console.ReadLine());
-
+                int choice = 0;
+                try
+                {
+                    Console.WriteLine("Enter ur choice");
+                    choice = Convert.ToInt16(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Enter only Numbers");
+                }
                 switch (choice)
                 {
                     case 1:
